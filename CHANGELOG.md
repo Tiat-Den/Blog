@@ -1,6 +1,8 @@
 # Changelog
 
-Date: 16/8/2026 
+Date: 17/8/2026 
+- Hoàn thành Phase 23 - Monitoring & Analytics.
+- Tích hợp `@vercel/analytics` và `@vercel/speed-insights` vào `app/layout.tsx` để theo dõi lượng truy cập và đo hiệu năng trang web thực tế.
 - Hoàn thành Phase 22 - Deployment Setup.
 - Khởi tạo GitHub Actions CI (`.github/workflows/ci.yml`) để tự động kiểm tra lỗi (Lint, Test, TypeCheck) trước khi Deploy.
 - Tạo file cấu hình `vercel.json` thiết lập chuẩn bị cho việc đẩy lên Vercel.

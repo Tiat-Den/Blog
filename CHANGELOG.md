@@ -1,0 +1,80 @@
+# Changelog
+
+Date: 16/8/2026 
+- Hoàn thành Phase 22 - Deployment Setup.
+- Khởi tạo GitHub Actions CI (`.github/workflows/ci.yml`) để tự động kiểm tra lỗi (Lint, Test, TypeCheck) trước khi Deploy.
+- Tạo file cấu hình `vercel.json` thiết lập chuẩn bị cho việc đẩy lên Vercel.
+- Hoàn thành Phase 21 - Security.
+- Cấu hình HTTP Security Headers (`X-Frame-Options`, `Strict-Transport-Security`, v.v.) trong `next.config.ts`.
+- Thêm cơ chế Rate Limiting (chống spam) và Input Validation cho API `/api/views/[slug]` bằng RAM (in-memory Map).
+- Hoàn thành Phase 20 - Testing.
+- Cài đặt hệ thống Unit Test (Vitest) và E2E Test (Playwright).
+- Viết Unit Test cho Content Loader (Markdown Parsing) và Knowledge Graph Builder.
+- Viết E2E Test cho luồng duyệt Blog và chức năng tương tác 3D Universe.
+- Hoàn thành Phase 19 - Performance Optimization.
+- Refactor trang `/explore` thành Server Component để loại bỏ trạng thái loading thừa, chuyển việc gọi API tính toán Graph lên Server.
+- Cài đặt `@next/bundle-analyzer` để phân tích kích thước bundle khi build.
+- Hoàn thành Phase 18 - SEO & View Counter.
+- Tích hợp ViewCounter cho `Blog` và `Lab` sử dụng Database (PostgreSQL) thông qua API Route.
+- Cập nhật chuẩn SEO Metadata cho toàn bộ website (bao gồm cấu hình OpenGraph và Twitter Cards trong `app/layout.tsx`).
+- (Phase 17 - Admin & Auth: Đã quyết định loại bỏ khỏi roadmap để giữ vững triết lý "đơn giản nhất có thể", duy trì việc sử dụng Markdown/Git để quản lý nội dung thay vì xây dựng CMS phức tạp).
+- Hoàn thành Phase 16 - Database Integration.
+- Cài đặt `drizzle-orm`, `drizzle-kit` và driver `pg`.
+- Khởi tạo PostgreSQL Database chạy trên Docker (thông qua `docker-compose.yml`).
+- Định nghĩa Schema (`lib/db/schema.ts`) cho các bảng: Views, Guestbook và Users.
+- Viết file `.env` chứa chuỗi kết nối và push thành công schema vào DB.
+- Hoàn thành Phase 15 - Interactive Profile.
+- Xây dựng trang `/about` với giao diện "Player Profile" mang hơi hướng trò chơi.
+- Thêm phần "Skill Tree" hiển thị kỹ năng với thanh tiến trình.
+- Thêm phần "Active Quests" (Nhiệm vụ đang làm) và "Tech Stack".
+- Cập nhật Header để đưa link `About` lên đầu tiên.
+- Hoàn thành Phase 14 - Time Capsule.
+- Tạo schema `capsuleFrontmatterSchema` để lưu trữ các bản ghi snapshot hàng tháng.
+- Xây dựng trang `/capsule` hiển thị danh sách các tháng được nhóm theo Năm (Year-Month grouping).
+- Bổ sung thanh điều hướng "Previous/Next" bên trong trang chi tiết để dễ dàng so sánh giữa các tháng.
+- Hoàn thành Phase 13 - Personal Lab.
+- Nâng cấp schema để hỗ trợ cấu trúc Lab/Experiment (`labFrontmatterSchema`), bao gồm các status: Planned, Running, Success, Failed.
+- Xây dựng trang danh sách `/lab` hiển thị các thử nghiệm với giao diện đậm chất tech (mono font).
+- Cập nhật API Search và Graph để tự động nhận diện các bài viết thuộc mục Lab.
+- Hoàn thành Phase 12 - Three.js Universe (Knowledge Graph 3D).
+- Cài đặt `react-force-graph-3d` và `three` để dựng không gian 3D mượt mà.
+- Tích hợp 3D View vào trang `/explore`, hỗ trợ chuyển đổi giữa chế độ List View và 3D View.
+- Tùy chỉnh màu sắc Node theo từng loại (Post, Project, Note), hỗ trợ zoom, xoay, click để focus và chuột phải để mở bài viết.
+- Hoàn thành Phase 11 - Knowledge Graph (Data Model & Non-3D Explorer).
+- Xây dựng API `/api/graph` trích xuất quan hệ giữa các bài viết dựa trên trường `related` trong frontmatter để tạo thành tập dữ liệu đồ thị (Nodes và Edges).
+- Xây dựng trang `/explore` như một công cụ duyệt đồ thị dạng lưới (List View), tự động liệt kê các liên kết và kết nối của từng Node.
+- Hoàn thành Phase 10 - Journey / Timeline.
+- Nâng cấp schema để hỗ trợ cấu trúc Journey (`journeyFrontmatterSchema`).
+- Cập nhật thanh Header, thay đổi thứ tự menu và thêm mục `Journey`.
+- Xây dựng trang `/journey` với thiết kế giao diện Timeline dọc (Vertical Timeline), tự động đảo chiều trái-phải đan xen (alternating layout) cực kỳ tinh tế.
+- Hoàn thành Phase 09 - Search (Command Palette).
+- Cài đặt `cmdk` để tạo menu tìm kiếm bằng phím tắt `Cmd+K` / `Ctrl+K`.
+- Xây dựng API `/api/search` tự động thu thập và đánh chỉ mục (index) dữ liệu từ Blog, Projects, và Notes.
+- Thêm nút Search vào Header, nhóm kết quả tìm kiếm theo từng loại nội dung.
+- Hoàn thành Phase 08 - Second Brain (Khu vực Ghi chú Kiến thức).
+- Nâng cấp schema để hỗ trợ Note (trường `related` liên kết các bài viết).
+- Xây dựng trang danh sách Notes (`/brain`).
+- Xây dựng trang chi tiết Note (`/brain/[slug]`), có hiển thị các Ghi chú liên quan (Connected Notes).
+- Hoàn thành Phase 07 - Projects (Project Showcase).
+- Cập nhật Zod schema để hỗ trợ Frontmatter của Project (Status, Tech Stack, Repo URL).
+- Xây dựng trang danh sách Dự án (`/projects`).
+- Xây dựng trang chi tiết Dự án (`/projects/[slug]`) hiển thị timeline, status badge, tech stack, và open source links.
+- Hoàn thành Phase 06 - Blog (Blog Production-Ready).
+- Xây dựng trang danh sách Blog (`/blog`).
+- Xây dựng trang chi tiết Blog (`/blog/[slug]`) với Tailwind Typography plugin (`prose`).
+- Cấu hình SEO Metadata (Open Graph) cho các trang bài viết.
+- Tạo một file MDX mẫu đầu tiên (`hello-world.mdx`) để kiểm thử.
+- Bắt đầu triển khai Phase 05 - Home (Trang chủ).
+- Xây dựng component `HeroSection` với thiết kế không gian số.
+- Thiết lập `Header` và `Footer` cho toàn bộ layout.
+- Hoàn thành Phase 04 - Content Engine (Xây dựng pipeline xử lý Markdown/MDX).
+- Cài đặt `next-mdx-remote`, `gray-matter`, `zod`.
+- Tạo tiện ích đọc file và parsing Frontmatter (`lib/content/index.ts`).
+- Thiết lập Component `MdxContent` để render file MDX cùng với custom component (`Callout`, `CodeBlock`).
+- Hoàn thành Phase 03 - Design System (thiết lập ThemeProvider, CSS variables cho dark mode).
+- Tạo các UI Component cốt lõi (Button, Card) và Layout Component (Container).
+- Cài đặt các thư viện UI: next-themes, lucide-react, clsx, tailwind-merge.
+- Tạo file `.env.example` cho Git workflow
+- Cấu hình lại `tsconfig.json` trỏ đường dẫn tuyệt đối (absolute path) ra ngoài root
+- Khởi tạo thư mục gốc: `components/`, `content/` (với các thư mục con theo domain), `lib/`, `styles/`, `tests/`
+- Chạy lệnh `create-next-app` khởi tạo Next.js, TypeScript, Tailwind CSS, ESLint

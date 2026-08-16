@@ -1,6 +1,8 @@
 # Changelog
 
 Date: 17/8/2026 
+- Hoàn thành Phase 24 - Launch & Final Polish.
+- Đóng gói toàn bộ dự án, chạy test tự động (pass 100%), rà soát lại lỗi (pass) và dán nhãn phiên bản `v1.0.0` để ra mắt chính thức.
 - Hoàn thành Phase 23 - Monitoring & Analytics.
 - Tích hợp `@vercel/analytics` và `@vercel/speed-insights` vào `app/layout.tsx` để theo dõi lượng truy cập và đo hiệu năng trang web thực tế.
 - Hoàn thành Phase 22 - Deployment Setup.

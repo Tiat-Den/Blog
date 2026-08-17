@@ -1,3 +1,4 @@
+import { getDictionary } from "@/lib/dictionary";
 import { Container } from "@/components/layout/container";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,33 +11,32 @@ export const metadata: Metadata = {
   description: "Interactive profile, skills, and current objectives.",
 };
 
-const SKILLS = [
-  { name: "TypeScript / React", level: 90, status: "Mastering" },
-  { name: "Next.js Architecture", level: 85, status: "Advanced" },
-  { name: "Agentic AI / LLMs", level: 75, status: "Exploring deeply" },
-  { name: "UI/UX Design", level: 70, status: "Practicing" },
-  { name: "Three.js / WebGL", level: 40, status: "Learning" },
-];
 
-const STACK = [
-  "Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js", "Zod", "Lucide"
-];
-
-const QUESTS = [
-  { title: "Build Personal Universe", status: "In Progress", xp: "+500 XP" },
-  { title: "Master Autonomous Agents", status: "Active", xp: "+1000 XP" },
-  { title: "First 1K users on a SaaS", status: "Locked", xp: "???" },
-];
 
 export default async function AboutPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
+  const dict = await getDictionary(lang as "en" | "vi");
+
+  const SKILLS = [
+    { name: "TypeScript / React", level: 90, status: dict.about.skills.ts },
+    { name: "Next.js Architecture", level: 85, status: dict.about.skills.nextjs },
+    { name: "Agentic AI / LLMs", level: 75, status: dict.about.skills.ai },
+    { name: "UI/UX Design", level: 70, status: dict.about.skills.design },
+    { name: "Three.js / WebGL", level: 40, status: dict.about.skills.webgl },
+  ];
+  const STACK = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js", "Zod", "Lucide"];
+  const QUESTS = [
+    { title: dict.about.quests.q1, status: dict.about.quests.q1Status, xp: "+500 XP" },
+    { title: dict.about.quests.q2, status: dict.about.quests.q2Status, xp: "+1000 XP" },
+    { title: dict.about.quests.q3, status: dict.about.quests.q3Status, xp: "???" },
+  ];
+  
   return (
     <Container className="py-12 flex flex-col gap-12 max-w-4xl">
       <header className="flex flex-col gap-4">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Player Profile</h1>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">{dict.about.title}</h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-          I am a builder exploring the intersection of design, engineering, and artificial intelligence. 
-          This is my digital avatar.
+          {dict.about.description}
         </p>
       </header>
 
@@ -44,23 +44,21 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
         <div className="md:col-span-2 flex flex-col gap-8">
           <section className="flex flex-col gap-4">
             <h2 className="text-2xl font-bold flex items-center gap-2 border-b pb-2">
-              <Target className="w-5 h-5 text-primary" /> Current Objectives
+              <Target className="w-5 h-5 text-primary" /> {dict.about.objectives}
             </h2>
             <div className="prose prose-neutral dark:prose-invert">
               <p>
-                My primary focus right now is building autonomous systems that can 
-                reason, plan, and execute complex workflows. I believe the future of software
-                is agentic, and I want to be at the forefront of this shift.
+                {dict.about.objectivesP1}
               </p>
               <p>
-                When I'm not writing code, I'm usually reading about philosophy, playing indie games, or learning new visual design techniques.
+                {dict.about.objectivesP2}
               </p>
             </div>
           </section>
 
           <section className="flex flex-col gap-4">
             <h2 className="text-2xl font-bold flex items-center gap-2 border-b pb-2">
-              <Code2 className="w-5 h-5 text-primary" /> Skill Tree
+              <Code2 className="w-5 h-5 text-primary" /> {dict.about.skillTree}
             </h2>
             <div className="flex flex-col gap-4">
               {SKILLS.map(skill => (
@@ -80,7 +78,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
-                <Cpu className="w-4 h-4" /> Tech Stack
+                <Cpu className="w-4 h-4" /> {dict.about.techStack}
               </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-wrap gap-2">
@@ -93,7 +91,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
-                <Trophy className="w-4 h-4" /> Active Quests
+                <Trophy className="w-4 h-4" /> {dict.about.activeQuests}
               </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">

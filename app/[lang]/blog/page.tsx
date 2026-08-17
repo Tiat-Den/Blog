@@ -1,3 +1,4 @@
+import { getDictionary } from "@/lib/dictionary";
 import { getAllContent } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -13,20 +14,21 @@ export const metadata: Metadata = {
 
 export default async function BlogListingPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
+  const dict = await getDictionary(lang as "en" | "vi");
   const posts = await getAllContent(lang, "posts");
 
   return (
     <Container className="py-12 flex flex-col gap-8">
       <div className="flex flex-col gap-4 max-w-3xl">
-        <h1 className="text-4xl font-bold tracking-tight">Blog</h1>
+        <h1 className="text-4xl font-bold tracking-tight">{dict.blog.title}</h1>
         <p className="text-muted-foreground text-lg">
-          My latest thoughts, experiments, and technical deep-dives.
+          {dict.blog.description}
         </p>
       </div>
 
       {posts.length === 0 ? (
         <div className="py-12 text-center text-muted-foreground border rounded-xl border-dashed">
-          No posts found. Start writing in content/posts!
+          {dict.blog.empty}
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6">

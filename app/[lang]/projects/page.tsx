@@ -1,3 +1,4 @@
+import { getDictionary } from "@/lib/dictionary";
 import { getAllContent, projectFrontmatterSchema, ProjectFrontmatter } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -22,20 +23,21 @@ function StatusBadge({ status }: { status: ProjectFrontmatter["status"] }) {
 
 export default async function ProjectsListingPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
+  const dict = await getDictionary(lang as "en" | "vi");
   const projects = await getAllContent(lang, "projects", projectFrontmatterSchema);
 
   return (
     <Container className="py-12 flex flex-col gap-8">
       <div className="flex flex-col gap-4 max-w-3xl">
-        <h1 className="text-4xl font-bold tracking-tight">Projects</h1>
+        <h1 className="text-4xl font-bold tracking-tight">{dict.projects.title}</h1>
         <p className="text-muted-foreground text-lg">
-          A showcase of things I have built, am building, or plan to build.
+          {dict.projects.description}
         </p>
       </div>
 
       {projects.length === 0 ? (
         <div className="py-12 text-center text-muted-foreground border rounded-xl border-dashed">
-          No projects found. Add them to content/projects!
+          {dict.projects.empty}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

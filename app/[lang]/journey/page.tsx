@@ -1,3 +1,4 @@
+import { getDictionary } from "@/lib/dictionary";
 import { getAllContent, journeyFrontmatterSchema } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { MdxContent } from "@/components/mdx/MdxContent";
@@ -11,12 +12,13 @@ export const metadata: Metadata = {
 
 export default async function JourneyPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
+  const dict = await getDictionary(lang as "en" | "vi");
   const events = await getAllContent(lang, "journey", journeyFrontmatterSchema);
 
   return (
     <Container className="py-12 flex flex-col gap-12 max-w-3xl">
       <div className="flex flex-col gap-4">
-        <h1 className="text-4xl font-bold tracking-tight">Journey</h1>
+        <h1 className="text-4xl font-bold tracking-tight">{dict.journey.title}</h1>
         <p className="text-muted-foreground text-lg">
           A timeline of significant events, milestones, and turning points in my life and career.
         </p>

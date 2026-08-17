@@ -15,6 +15,62 @@
     "readBlog": "Đọc Bài Viết",
     "enterBrain": "Vào Bộ Não"
   },
+  "about": {
+    "title": "Hồ Sơ Cá Nhân",
+    "description": "Tôi là một nhà phát triển đam mê khám phá sự giao thoa giữa thiết kế, kỹ thuật và trí tuệ nhân tạo. Đây là hình đại diện kỹ thuật số của tôi.",
+    "objectives": "Mục tiêu hiện tại",
+    "objectivesP1": "Trọng tâm chính của tôi hiện tại là xây dựng các hệ thống tự trị có thể suy luận, lập kế hoạch và thực thi các quy trình làm việc phức tạp. Tôi tin rằng tương lai của phần mềm là các AI tự chủ (agentic AI), và tôi muốn đi tiên phong trong sự thay đổi này.",
+    "objectivesP2": "Khi không viết code, tôi thường đọc về triết học, chơi game độc lập, hoặc học các kỹ thuật thiết kế hình ảnh mới.",
+    "skillTree": "Cây Kỹ Năng",
+    "techStack": "Công Nghệ",
+    "activeQuests": "Nhiệm vụ Đang Làm",
+    "skills": {
+      "ts": "Thành thạo",
+      "nextjs": "Nâng cao",
+      "ai": "Đang nghiên cứu sâu",
+      "design": "Đang rèn luyện",
+      "webgl": "Đang học"
+    },
+    "quests": {
+      "q1": "Xây dựng Vũ Trụ Cá Nhân",
+      "q1Status": "Đang tiến hành",
+      "q2": "Làm chủ Autonomous Agents",
+      "q2Status": "Đang hoạt động",
+      "q3": "1000 người dùng đầu tiên cho SaaS",
+      "q3Status": "Đã khóa"
+    }
+  },
+  "blog": {
+    "title": "Bài viết",
+    "description": "Những suy nghĩ, thí nghiệm và bài viết chuyên sâu về kỹ thuật mới nhất của tôi.",
+    "empty": "Chưa có bài viết nào."
+  },
+  "projects": {
+    "title": "Dự án",
+    "description": "Nơi trưng bày những thứ tôi đã xây dựng, đang xây dựng hoặc dự định xây dựng.",
+    "empty": "Chưa có dự án nào."
+  },
+  "brain": {
+    "title": "Bộ Não",
+    "description": "Khu vườn kỹ thuật số và bộ não thứ hai của tôi. Các khái niệm, ý tưởng và những suy nghĩ liên kết.",
+    "empty": "Chưa có ghi chú nào.",
+    "connectedNotes": "Các ghi chú liên kết"
+  },
+  "journey": {
+    "title": "Hành trình",
+    "description": "Dòng thời gian về các sự kiện, cột mốc và sự phát triển cá nhân.",
+    "empty": "Chưa có sự kiện nào."
+  },
+  "lab": {
+    "title": "Thí nghiệm",
+    "description": "Nơi thử nghiệm mã nguồn và khám phá các công nghệ mới. Có thể hơi lộn xộn.",
+    "empty": "Chưa có thí nghiệm nào."
+  },
+  "capsule": {
+    "title": "Kén thời gian",
+    "description": "Tóm tắt định kỳ và những bức ảnh chụp nhanh về các giai đoạn trong cuộc đời.",
+    "empty": "Chưa có kén thời gian nào."
+  },
   "footer": {
     "rights": "Được xây dựng như một Vũ Trụ Cá Nhân. Đã đăng ký bản quyền."
   }

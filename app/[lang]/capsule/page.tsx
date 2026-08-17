@@ -1,3 +1,4 @@
+import { getDictionary } from "@/lib/dictionary";
 import { getAllContent, capsuleFrontmatterSchema } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import Link from "next/link";
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 
 export default async function CapsuleListingPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
+  const dict = await getDictionary(lang as "en" | "vi");
   const capsules = await getAllContent(lang, "capsule", capsuleFrontmatterSchema);
 
   // Group by year
@@ -25,16 +27,15 @@ export default async function CapsuleListingPage({ params }: { params: Promise<{
   return (
     <Container className="py-12 flex flex-col gap-12 max-w-3xl">
       <div className="flex flex-col gap-4">
-        <h1 className="text-4xl font-bold tracking-tight">Time Capsule</h1>
+        <h1 className="text-4xl font-bold tracking-tight">{dict.capsule.title}</h1>
         <p className="text-muted-foreground text-lg">
-          Monthly snapshots of what I'm learning, building, and thinking about.
-          A structured way to look back and see how much has changed.
+          {dict.capsule.description}
         </p>
       </div>
 
       {years.length === 0 ? (
         <div className="py-12 text-center text-muted-foreground border rounded-xl border-dashed">
-          No snapshots yet. Create one in content/capsule!
+          {dict.capsule.empty}
         </div>
       ) : (
         <div className="flex flex-col gap-12">

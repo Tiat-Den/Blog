@@ -1,3 +1,4 @@
+import { getDictionary } from "@/lib/dictionary";
 import { getAllContent, noteFrontmatterSchema } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 
 export default async function BrainListingPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
+  const dict = await getDictionary(lang as "en" | "vi");
   const notes = await getAllContent(lang, "notes", noteFrontmatterSchema);
 
   return (

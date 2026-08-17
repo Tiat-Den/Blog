@@ -15,6 +15,62 @@
     "readBlog": "Read Blog",
     "enterBrain": "Enter Brain"
   },
+  "about": {
+    "title": "Player Profile",
+    "description": "I am a builder exploring the intersection of design, engineering, and artificial intelligence. This is my digital avatar.",
+    "objectives": "Current Objectives",
+    "objectivesP1": "My primary focus right now is building autonomous systems that can reason, plan, and execute complex workflows. I believe the future of software is agentic, and I want to be at the forefront of this shift.",
+    "objectivesP2": "When I'm not writing code, I'm usually reading about philosophy, playing indie games, or learning new visual design techniques.",
+    "skillTree": "Skill Tree",
+    "techStack": "Tech Stack",
+    "activeQuests": "Active Quests",
+    "skills": {
+      "ts": "Mastering",
+      "nextjs": "Advanced",
+      "ai": "Exploring deeply",
+      "design": "Practicing",
+      "webgl": "Learning"
+    },
+    "quests": {
+      "q1": "Build Personal Universe",
+      "q1Status": "In Progress",
+      "q2": "Master Autonomous Agents",
+      "q2Status": "Active",
+      "q3": "First 1K users on a SaaS",
+      "q3Status": "Locked"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "My latest thoughts, experiments, and technical deep-dives.",
+    "empty": "No posts found."
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "A showcase of things I have built, am building, or plan to build.",
+    "empty": "No projects found."
+  },
+  "brain": {
+    "title": "Brain",
+    "description": "My digital garden and second brain. Concepts, ideas, and interconnected thoughts.",
+    "empty": "No notes found.",
+    "connectedNotes": "Connected Notes"
+  },
+  "journey": {
+    "title": "Journey",
+    "description": "A timeline of events, milestones, and personal growth.",
+    "empty": "No events found."
+  },
+  "lab": {
+    "title": "Lab",
+    "description": "Experimental playground for half-baked ideas and raw code.",
+    "empty": "No experiments found."
+  },
+  "capsule": {
+    "title": "Time Capsule",
+    "description": "Periodic reflections, snapshots, and letters to my future self.",
+    "empty": "No capsules found."
+  },
   "footer": {
     "rights": "Built as a Personal Universe. All rights reserved."
   }

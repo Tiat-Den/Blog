@@ -1,3 +1,4 @@
+import { getDictionary } from "@/lib/dictionary";
 import { getAllContent, labFrontmatterSchema, LabFrontmatter } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -21,12 +22,13 @@ function StatusBadge({ status }: { status: LabFrontmatter["status"] }) {
 
 export default async function LabListingPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
+  const dict = await getDictionary(lang as "en" | "vi");
   const labs = await getAllContent(lang, "lab", labFrontmatterSchema);
 
   return (
     <Container className="py-12 flex flex-col gap-8">
       <div className="flex flex-col gap-4 max-w-3xl">
-        <h1 className="text-4xl font-bold tracking-tight">Lab</h1>
+        <h1 className="text-4xl font-bold tracking-tight">{dict.lab.title}</h1>
         <p className="text-muted-foreground text-lg">
           My personal laboratory for UI experiments, code tests, and random ideas.
           Not everything here works, and that's the point.

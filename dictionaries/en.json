@@ -25,19 +25,19 @@
     "techStack": "Tech Stack",
     "activeQuests": "Active Quests",
     "skills": {
-      "ts": "Mastering",
-      "nextjs": "Advanced",
-      "ai": "Exploring deeply",
-      "design": "Practicing",
-      "webgl": "Learning"
+      "flutter": "Advanced",
+      "csharp": "Mastering",
+      "nextjs": "Practicing",
+      "db": "Solid",
+      "design": "Learning"
     },
     "quests": {
-      "q1": "Build Personal Universe",
-      "q1Status": "In Progress",
-      "q2": "Master Autonomous Agents",
-      "q2Status": "Active",
-      "q3": "First 1K users on a SaaS",
-      "q3Status": "Locked"
+      "q1": "Develop ASP.NET Web Store",
+      "q1Status": "Active",
+      "q2": "Build Personal Universe Blog",
+      "q2Status": "In Progress",
+      "q3": "Complete Flutter Movie App",
+      "q3Status": "Completed"
     },
     "origin": "Origin Story",
     "originText": "My journey started with a fascination for digital worlds and how they were built. Over time, that curiosity evolved into a passion for software engineering, system design, and artificial intelligence. I am constantly learning, building, and trying to understand how complex problems can be solved with elegant solutions.",

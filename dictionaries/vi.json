@@ -25,19 +25,19 @@
     "techStack": "Công Nghệ",
     "activeQuests": "Nhiệm vụ Đang Làm",
     "skills": {
-      "ts": "Thành thạo",
-      "nextjs": "Nâng cao",
-      "ai": "Đang nghiên cứu sâu",
-      "design": "Đang rèn luyện",
-      "webgl": "Đang học"
+      "flutter": "Nâng cao",
+      "csharp": "Thành thạo",
+      "nextjs": "Đang rèn luyện",
+      "db": "Khá tốt",
+      "design": "Đang học"
     },
     "quests": {
-      "q1": "Xây dựng Vũ Trụ Cá Nhân",
-      "q1Status": "Đang tiến hành",
-      "q2": "Làm chủ Autonomous Agents",
-      "q2Status": "Đang hoạt động",
-      "q3": "1000 người dùng đầu tiên cho SaaS",
-      "q3Status": "Đã khóa"
+      "q1": "Phát triển Web Bán Hàng ASP.NET",
+      "q1Status": "Đang hoạt động",
+      "q2": "Xây dựng Vũ Trụ Cá Nhân",
+      "q2Status": "Đang tiến hành",
+      "q3": "Hoàn thiện Flutter Movie App",
+      "q3Status": "Hoàn thành"
     },
     "origin": "Tiểu Sử",
     "originText": "Hành trình của tôi bắt đầu từ sự say mê với các thế giới kỹ thuật số và cách chúng được tạo ra. Theo thời gian, sự tò mò đó phát triển thành niềm đam mê với kỹ thuật phần mềm, thiết kế hệ thống và trí tuệ nhân tạo. Tôi luôn không ngừng học hỏi, xây dựng và tìm cách giải quyết các vấn đề phức tạp bằng những giải pháp tối ưu, thanh lịch nhất.",

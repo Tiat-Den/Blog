@@ -18,17 +18,17 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
   const dict = await getDictionary(lang as "en" | "vi");
 
   const SKILLS = [
-    { name: "TypeScript / React", level: 90, status: dict.about.skills.ts },
-    { name: "Next.js Architecture", level: 85, status: dict.about.skills.nextjs },
-    { name: "Agentic AI / LLMs", level: 75, status: dict.about.skills.ai },
-    { name: "UI/UX Design", level: 70, status: dict.about.skills.design },
-    { name: "Three.js / WebGL", level: 40, status: dict.about.skills.webgl },
+    { name: "C# / ASP.NET Core", level: 85, status: dict.about.skills.csharp },
+    { name: "Flutter / Dart", level: 80, status: dict.about.skills.flutter },
+    { name: "SQL / Database Design", level: 75, status: dict.about.skills.db },
+    { name: "Next.js / React", level: 70, status: dict.about.skills.nextjs },
+    { name: "UI/UX Design", level: 60, status: dict.about.skills.design },
   ];
-  const STACK = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js", "Zod", "Lucide"];
+  const STACK = ["C#", "ASP.NET Core", "Flutter", "Dart", "SQL Server", "Next.js", "Tailwind CSS", "Firebase"];
   const QUESTS = [
-    { title: dict.about.quests.q1, status: dict.about.quests.q1Status, xp: "+500 XP" },
-    { title: dict.about.quests.q2, status: dict.about.quests.q2Status, xp: "+1000 XP" },
-    { title: dict.about.quests.q3, status: dict.about.quests.q3Status, xp: "???" },
+    { title: dict.about.quests.q1, status: dict.about.quests.q1Status, xp: "+1200 XP" },
+    { title: dict.about.quests.q2, status: dict.about.quests.q2Status, xp: "+500 XP" },
+    { title: dict.about.quests.q3, status: dict.about.quests.q3Status, xp: "+800 XP" },
   ];
   
   return (

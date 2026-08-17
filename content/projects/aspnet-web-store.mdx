@@ -1,0 +1,28 @@
+---
+title: "Web Store: Hệ thống Bán Hàng Trực Tuyến với ASP.NET Core"
+summary: "Dự án Website thương mại điện tử hoàn chỉnh, tích hợp giỏ hàng, thanh toán và xác thực người dùng bằng tài khoản Google."
+date: "2026-08-17"
+githubUrl: ""
+demoUrl: ""
+tags: ["ASP.NET Core", "C#", "SQL Server", "EF Core", "MVC"]
+---
+
+**Web Store (Bai Cuoi Ky)** là dự án website bán hàng trực tuyến được phát triển trên nền tảng **ASP.NET Core MVC**. Dự án cung cấp một giải pháp thương mại điện tử hoàn chỉnh từ khâu hiển thị sản phẩm, thêm vào giỏ hàng, cho đến quản lý đơn đặt hàng và phân quyền người dùng.
+
+## Các tính năng nổi bật
+
+- **Quản lý Sản phẩm & Danh mục**: Hiển thị danh sách sản phẩm theo từng danh mục, hỗ trợ tìm kiếm và phân trang.
+- **Giỏ hàng (Shopping Cart)**: Hệ thống giỏ hàng được quản lý qua `Session`, cho phép người dùng thêm/bớt sản phẩm tiện lợi mà không cần đăng nhập trước.
+- **Xác thực đa nền tảng**: Tích hợp **ASP.NET Core Identity** để quản lý tài khoản người dùng và phân quyền (Admin/Customer). Hỗ trợ đăng nhập nhanh bằng tài khoản **Google OAuth 2.0**.
+- **Quản lý Đơn hàng**: Người dùng có thể tiến hành Checkout, hệ thống sẽ lưu thông tin `Order` và `OrderDetail` vào cơ sở dữ liệu.
+- **Tự động cấu hình Database**: Tự động chạy `Migrations` và tạo dữ liệu mẫu (Role Seeding) ngay khi khởi động ứng dụng.
+
+## Công nghệ sử dụng
+
+- **Backend**: C# 11, ASP.NET Core 8.0, MVC Pattern
+- **Database**: SQL Server
+- **ORM**: Entity Framework Core (Code-First Approach)
+- **Authentication**: ASP.NET Core Identity, Google Authentication
+- **Frontend**: Razor Views (`.cshtml`), Bootstrap, HTML/CSS/JS
+
+Dự án này là một minh chứng rõ nét cho khả năng xây dựng ứng dụng web bảo mật, hiệu suất cao và có kiến trúc rõ ràng (clean architecture) bằng hệ sinh thái .NET.

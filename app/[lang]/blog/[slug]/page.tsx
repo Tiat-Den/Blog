@@ -50,7 +50,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">{post.metadata.title}</h1>
         <div className="flex items-center gap-4 text-muted-foreground text-sm font-mono mt-2">
           <time dateTime={post.metadata.date}>{post.metadata.date}</time>
-          <ViewCounter slug={post.slug} trackView={true} hidden={false} />
+          <ViewCounter slug={post.slug} trackView={true} hidden={true} />
         </div>
         {post.metadata.tags && post.metadata.tags.length > 0 && (
           <div className="flex gap-2 mt-2">

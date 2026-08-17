@@ -1,0 +1,31 @@
+---
+title: "App Quản Lý Kho QR"
+summary: "Ứng dụng Android Native giúp số hóa quy trình quản lý xuất nhập tồn kho bằng mã QR, tích hợp ZXing và CameraX."
+date: "2026-08-17"
+githubUrl: ""
+demoUrl: ""
+tags: ["Android", "Kotlin", "Room DB", "ZXing"]
+---
+
+**AppQLQR** là một ứng dụng di động được xây dựng trên nền tảng Android (Kotlin), nhằm giải quyết bài toán quản lý hàng hóa trong kho một cách nhanh chóng và chính xác nhất thông qua việc quét mã vạch/mã QR.
+
+## Tính năng chính
+
+- **Quản lý danh mục sản phẩm**: Thêm mới, chỉnh sửa thông tin sản phẩm và tự động sinh mã QR tương ứng cho từng mặt hàng.
+- **Quản lý xuất/nhập kho bằng Camera**: Thay vì nhập liệu thủ công bằng tay, người dùng chỉ cần đưa camera vào mã QR dán trên thùng hàng. Ứng dụng sẽ tự động trích xuất thông tin sản phẩm và tạo phiếu xuất/nhập.
+- **Thống kê và báo cáo**: Tích hợp thư viện biểu đồ MPAndroidChart giúp thủ kho dễ dàng nắm bắt được tình hình tồn kho, số lượng hàng xuất nhập trong tháng qua các biểu đồ trực quan.
+- **Hoạt động Offline**: Toàn bộ dữ liệu được lưu trữ an toàn trong máy thông qua `Room Database`, cho phép sử dụng ứng dụng ngay cả khi không có kết nối Internet.
+
+## Công nghệ sử dụng
+
+- **Ngôn ngữ**: Kotlin
+- **Database**: Room Database (SQLite)
+- **Quét mã**: CameraX API kết hợp với ZXing Android Embedded
+- **Giao diện**: XML truyền thống, ConstraintLayout, Material Design
+- **Khác**: Glide (tải ảnh), MPAndroidChart (vẽ biểu đồ)
+
+## Định hướng phát triển
+
+Dự án hiện tại là phiên bản MVP hoạt động hoàn toàn offline. Trong tương lai, mình dự định sẽ tích hợp thêm Firebase hoặc một REST API Server để có thể đồng bộ hóa dữ liệu giữa nhiều thiết bị và nhiều thủ kho khác nhau trong cùng một tổ chức.
+
+*Để tìm hiểu sâu hơn về cách mình tích hợp CameraX và ZXing, bạn có thể đọc thêm bài viết trong mục Blog.*

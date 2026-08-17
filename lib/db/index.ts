@@ -11,7 +11,10 @@ declare global {
   var dbPool: Pool | undefined;
 }
 
-const pool = global.dbPool || new Pool({ connectionString });
+const pool = global.dbPool || new Pool({ 
+  connectionString,
+  ssl: connectionString.includes("supabase.com") ? { rejectUnauthorized: false } : undefined
+});
 
 if (process.env.NODE_ENV !== "production") {
   global.dbPool = pool;

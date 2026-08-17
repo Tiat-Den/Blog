@@ -1,0 +1,42 @@
+---
+title: "Project Showcase: Media-Rich Flutter Movie App"
+date: "2026-08-17"
+description: "A comprehensive movie streaming and real-time interaction application built with Flutter, Firebase, Agora RTC, and FFmpeg."
+tags: ["flutter", "dart", "firebase", "mobile", "project"]
+draft: false
+---
+
+# Building a Media-Rich Flutter Movie App
+
+When developing a comprehensive multimedia application, combining streaming, data synchronization, and real-time user interaction requires a robust architecture. My recent Flutter Movie App project does exactly that.
+
+## Project Overview
+
+The app is designed not just for browsing movies, but as a full-fledged media ecosystem. It allows users to authenticate seamlessly, browse large catalogs of movies, watch trailers/movies natively, and even engage in real-time communication.
+
+### Core Features
+
+- **Authentication:** Secure login leveraging Firebase Auth and Google Sign-In.
+- **Dynamic Database:** Real-time data syncing and favorites management using Cloud Firestore.
+- **Media Playback:** High-performance video streaming natively embedded using `video_player` and `youtube_player_flutter`.
+- **Real-Time Communication:** Integrating `agora_rtc_engine` for advanced voice/video sync features.
+- **Video Processing:** On-device media manipulation powered by `ffmpeg_kit_flutter_new`.
+
+## Architecture & Tech Stack
+
+I structured the app using standard Flutter architectural patterns to ensure scalability:
+
+- `models/`: Clean data classes representing Movies, Users, and API responses.
+- `providers/`: State management handling the complex state of media players and real-time connections.
+- `services/`: API abstractions using `Dio` and `http` to fetch movie data from REST endpoints.
+- `screens/`: Responsive and animated UI components for an immersive user experience.
+
+<Callout type="tip">
+  By isolating API calls in `services/` and state in `providers/`, the UI (`screens/`) remains incredibly lightweight and responsive—a critical factor for media apps.
+</Callout>
+
+## The Challenge of Media
+
+Handling media across iOS and Android natively is notoriously complex. In this project, I used `cached_network_image` to aggressively cache movie posters, reducing API load and bandwidth. Furthermore, managing the lifecycle of multiple `video_player` controllers required careful memory management to prevent memory leaks and frame drops.
+
+In future posts, I will dive deeper into the specific technical implementations of the video players and the Agora RTC integrations. Stay tuned!

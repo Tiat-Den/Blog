@@ -22,8 +22,8 @@ export function Header({ dict, lang }: { dict: any; lang: string }) {
             <Link href={`/${lang}/capsule`} className="hover:text-foreground transition-colors">{dict.nav.capsule}</Link>
           </nav>
           <div className="flex items-center gap-2">
-            <LanguageSwitcher currentLang={lang} />
             <CommandPalette />
+            <LanguageSwitcher currentLang={lang} />
           </div>
         </div>
       </Container>

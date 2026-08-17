@@ -16,60 +16,60 @@
     "enterBrain": "Vào Bộ Não"
   },
   "about": {
-    "title": "Player Profile",
-    "description": "I am a builder exploring the intersection of design, engineering, and artificial intelligence. This is my digital avatar.",
-    "objectives": "Current Objectives",
-    "objectivesP1": "My primary focus right now is building autonomous systems that can reason, plan, and execute complex workflows. I believe the future of software is agentic, and I want to be at the forefront of this shift.",
-    "objectivesP2": "When I'm not writing code, I'm usually reading about philosophy, playing indie games, or learning new visual design techniques.",
-    "skillTree": "Skill Tree",
-    "techStack": "Tech Stack",
-    "activeQuests": "Active Quests",
+    "title": "Hồ Sơ Cá Nhân",
+    "description": "Tôi là một nhà phát triển đam mê khám phá sự giao thoa giữa thiết kế, kỹ thuật và trí tuệ nhân tạo. Đây là hình đại diện kỹ thuật số của tôi.",
+    "objectives": "Mục tiêu hiện tại",
+    "objectivesP1": "Trọng tâm chính của tôi hiện tại là xây dựng các hệ thống tự trị có thể suy luận, lập kế hoạch và thực thi các quy trình làm việc phức tạp. Tôi tin rằng tương lai của phần mềm là các AI tự chủ (agentic AI), và tôi muốn đi tiên phong trong sự thay đổi này.",
+    "objectivesP2": "Khi không viết code, tôi thường đọc về triết học, chơi game độc lập, hoặc học các kỹ thuật thiết kế hình ảnh mới.",
+    "skillTree": "Cây Kỹ Năng",
+    "techStack": "Công Nghệ",
+    "activeQuests": "Nhiệm vụ Đang Làm",
     "skills": {
-      "ts": "Mastering",
-      "nextjs": "Advanced",
-      "ai": "Exploring deeply",
-      "design": "Practicing",
-      "webgl": "Learning"
+      "ts": "Thành thạo",
+      "nextjs": "Nâng cao",
+      "ai": "Đang nghiên cứu sâu",
+      "design": "Đang rèn luyện",
+      "webgl": "Đang học"
     },
     "quests": {
-      "q1": "Build Personal Universe",
-      "q1Status": "In Progress",
-      "q2": "Master Autonomous Agents",
-      "q2Status": "Active",
-      "q3": "First 1K users on a SaaS",
-      "q3Status": "Locked"
+      "q1": "Xây dựng Vũ Trụ Cá Nhân",
+      "q1Status": "Đang tiến hành",
+      "q2": "Làm chủ Autonomous Agents",
+      "q2Status": "Đang hoạt động",
+      "q3": "1000 người dùng đầu tiên cho SaaS",
+      "q3Status": "Đã khóa"
     }
   },
   "blog": {
-    "title": "Blog",
-    "description": "My latest thoughts, experiments, and technical deep-dives.",
-    "empty": "No posts found."
+    "title": "Bài viết",
+    "description": "Những suy nghĩ, thí nghiệm và bài viết chuyên sâu về kỹ thuật mới nhất của tôi.",
+    "empty": "Chưa có bài viết nào."
   },
   "projects": {
-    "title": "Projects",
-    "description": "A showcase of things I have built, am building, or plan to build.",
-    "empty": "No projects found."
+    "title": "Dự án",
+    "description": "Nơi trưng bày những thứ tôi đã xây dựng, đang xây dựng hoặc dự định xây dựng.",
+    "empty": "Chưa có dự án nào."
   },
   "brain": {
-    "title": "Brain",
-    "description": "My digital garden and second brain. Concepts, ideas, and interconnected thoughts.",
-    "empty": "No notes found.",
-    "connectedNotes": "Connected Notes"
+    "title": "Bộ Não",
+    "description": "Khu vườn kỹ thuật số và bộ não thứ hai của tôi. Các khái niệm, ý tưởng và những suy nghĩ liên kết.",
+    "empty": "Chưa có ghi chú nào.",
+    "connectedNotes": "Các ghi chú liên kết"
   },
   "journey": {
-    "title": "Journey",
-    "description": "A timeline of events, milestones, and personal growth.",
-    "empty": "No events found."
+    "title": "Hành trình",
+    "description": "Dòng thời gian về các sự kiện, cột mốc và sự phát triển cá nhân.",
+    "empty": "Chưa có sự kiện nào."
   },
   "lab": {
-    "title": "Lab",
-    "description": "Experimental playground for half-baked ideas and raw code.",
-    "empty": "No experiments found."
+    "title": "Thí nghiệm",
+    "description": "Nơi thử nghiệm mã nguồn và khám phá các công nghệ mới. Có thể hơi lộn xộn.",
+    "empty": "Chưa có thí nghiệm nào."
   },
   "capsule": {
-    "title": "Time Capsule",
-    "description": "Periodic reflections, snapshots, and letters to my future self.",
-    "empty": "No capsules found."
+    "title": "Kén thời gian",
+    "description": "Tóm tắt định kỳ và những bức ảnh chụp nhanh về các giai đoạn trong cuộc đời.",
+    "empty": "Chưa có kén thời gian nào."
   },
   "footer": {
     "rights": "Được xây dựng như một Vũ Trụ Cá Nhân. Đã đăng ký bản quyền."

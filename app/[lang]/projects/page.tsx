@@ -42,7 +42,7 @@ export default async function ProjectsListingPage({ params }: { params: Promise<
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project) => (
-            <Link key={project.slug} href={`/${lang}/${lang}/projects/${project.slug}`}>
+            <Link key={project.slug} href={`/${lang}/projects/${project.slug}`}>
               <Card className="hover:border-primary/50 transition-colors cursor-pointer h-full flex flex-col">
                 <CardHeader>
                   <div className="flex justify-between items-start gap-4">

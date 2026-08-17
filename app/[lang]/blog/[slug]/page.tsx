@@ -44,7 +44,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
   return (
     <Container className="py-12 flex flex-col gap-12 max-w-3xl">
       <header className="flex flex-col gap-4">
-        <Link href={`/${lang}/${params.lang}/blog`} className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors">
+        <Link href={`/${lang}/blog`} className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors">
           ← Back to Blog
         </Link>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">{post.metadata.title}</h1>

@@ -1,42 +1,42 @@
 ---
-title: "Project Showcase: Media-Rich Flutter Movie App"
+title: "Showcase: Ứng dụng xem phim bằng Flutter"
 date: "2026-08-17"
-description: "A comprehensive movie streaming and real-time interaction application built with Flutter, Firebase, Agora RTC, and FFmpeg."
+description: "Một ứng dụng xem phim trực tuyến toàn diện, hỗ trợ tương tác thời gian thực được xây dựng bằng Flutter, Firebase, Agora RTC và FFmpeg."
 tags: ["flutter", "dart", "firebase", "mobile", "project"]
 draft: false
 ---
 
-# Building a Media-Rich Flutter Movie App
+# Xây dựng Ứng dụng xem phim đa nền tảng với Flutter
 
-When developing a comprehensive multimedia application, combining streaming, data synchronization, and real-time user interaction requires a robust architecture. My recent Flutter Movie App project does exactly that.
+Khi phát triển một ứng dụng đa phương tiện (multimedia) toàn diện, việc kết hợp giữa streaming, đồng bộ hóa dữ liệu và tương tác người dùng theo thời gian thực đòi hỏi một kiến trúc cực kỳ vững chắc. Dự án Flutter Movie App gần đây của mình đã làm được điều đó.
 
-## Project Overview
+## Tổng quan dự án
 
-The app is designed not just for browsing movies, but as a full-fledged media ecosystem. It allows users to authenticate seamlessly, browse large catalogs of movies, watch trailers/movies natively, and even engage in real-time communication.
+Ứng dụng không chỉ được thiết kế để lướt xem danh sách phim, mà còn là một hệ sinh thái giải trí hoàn chỉnh. Nó cho phép người dùng đăng nhập an toàn, duyệt qua kho phim khổng lồ, xem trailer/phim trực tiếp trên ứng dụng và thậm chí là giao tiếp với nhau trong thời gian thực.
 
-### Core Features
+### Các tính năng cốt lõi
 
-- **Authentication:** Secure login leveraging Firebase Auth and Google Sign-In.
-- **Dynamic Database:** Real-time data syncing and favorites management using Cloud Firestore.
-- **Media Playback:** High-performance video streaming natively embedded using `video_player` and `youtube_player_flutter`.
-- **Real-Time Communication:** Integrating `agora_rtc_engine` for advanced voice/video sync features.
-- **Video Processing:** On-device media manipulation powered by `ffmpeg_kit_flutter_new`.
+- **Xác thực (Authentication):** Đăng nhập bảo mật thông qua Firebase Auth và Google Sign-In.
+- **Cơ sở dữ liệu động (Dynamic Database):** Đồng bộ hóa dữ liệu thời gian thực và quản lý danh sách phim yêu thích bằng Cloud Firestore.
+- **Phát Media (Media Playback):** Truyền phát video hiệu năng cao được nhúng trực tiếp bằng `video_player` và `youtube_player_flutter`.
+- **Giao tiếp thời gian thực (Real-Time Communication):** Tích hợp `agora_rtc_engine` để mang đến các tính năng đồng bộ video/âm thanh nâng cao.
+- **Xử lý Video (Video Processing):** Các thao tác chỉnh sửa media cục bộ trên thiết bị nhờ sức mạnh của `ffmpeg_kit_flutter_new`.
 
-## Architecture & Tech Stack
+## Kiến trúc & Tech Stack
 
-I structured the app using standard Flutter architectural patterns to ensure scalability:
+Mình đã cấu trúc ứng dụng bằng các pattern tiêu chuẩn của Flutter để đảm bảo khả năng mở rộng (scalability):
 
-- `models/`: Clean data classes representing Movies, Users, and API responses.
-- `providers/`: State management handling the complex state of media players and real-time connections.
-- `services/`: API abstractions using `Dio` and `http` to fetch movie data from REST endpoints.
-- `screens/`: Responsive and animated UI components for an immersive user experience.
+- `models/`: Các class dữ liệu chuẩn mực đại diện cho Movies, Users, và các phản hồi từ API.
+- `providers/`: Quản lý state (trạng thái) phức tạp của các trình phát media và các kết nối thời gian thực.
+- `services/`: Trừu tượng hóa các tầng API bằng `Dio` và `http` để lấy dữ liệu phim từ các REST endpoints.
+- `screens/`: Giao diện người dùng responsive, nhiều hiệu ứng animation mang lại trải nghiệm nhập vai.
 
 <Callout type="tip">
-  By isolating API calls in `services/` and state in `providers/`, the UI (`screens/`) remains incredibly lightweight and responsive—a critical factor for media apps.
+  Việc tách biệt các lệnh gọi API vào `services/` và quản lý trạng thái trong `providers/` giúp cho giao diện (`screens/`) luôn nhẹ nhàng và phản hồi nhanh chóng — một yếu tố sống còn đối với các ứng dụng media.
 </Callout>
 
-## The Challenge of Media
+## Thách thức khi xử lý Media
 
-Handling media across iOS and Android natively is notoriously complex. In this project, I used `cached_network_image` to aggressively cache movie posters, reducing API load and bandwidth. Furthermore, managing the lifecycle of multiple `video_player` controllers required careful memory management to prevent memory leaks and frame drops.
+Việc xử lý media native trên cả iOS và Android nổi tiếng là phức tạp. Trong dự án này, mình đã sử dụng `cached_network_image` để tự động cache các tấm poster phim một cách tối đa, giảm tải cho API và tiết kiệm băng thông. Hơn nữa, việc quản lý vòng đời (lifecycle) của nhiều `video_player` controller đòi hỏi sự quản lý bộ nhớ vô cùng tỉ mỉ để ngăn chặn tình trạng rò rỉ bộ nhớ (memory leaks) và tụt frame (frame drops).
 
-In future posts, I will dive deeper into the specific technical implementations of the video players and the Agora RTC integrations. Stay tuned!
+Trong các bài viết tới, mình sẽ đi sâu hơn vào việc triển khai kỹ thuật của các trình phát video và cách tích hợp Agora RTC. Các bạn cùng đón xem nhé!

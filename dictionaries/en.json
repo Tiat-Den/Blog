@@ -38,6 +38,16 @@
       "q2Status": "Active",
       "q3": "First 1K users on a SaaS",
       "q3Status": "Locked"
+    },
+    "origin": "Origin Story",
+    "originText": "My journey started with a fascination for digital worlds and how they were built. Over time, that curiosity evolved into a passion for software engineering, system design, and artificial intelligence. I am constantly learning, building, and trying to understand how complex problems can be solved with elegant solutions.",
+    "arsenal": "Arsenal & Gear",
+    "gear": {
+      "g1": "Custom Build PC (RTX 4070, 32GB RAM)",
+      "g2": "Keychron Q1 Pro Mechanical Keyboard",
+      "g3": "Logitech MX Master 3S",
+      "g4": "VS Code & Neovim",
+      "g5": "Figma for UI/UX"
     }
   },
   "blog": {

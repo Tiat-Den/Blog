@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Metadata } from "next";
-import { Target, Code2, Trophy, Cpu, Zap, Star } from "lucide-react";
+import { Target, Code2, Trophy, Cpu, Zap, Star, BookOpen, MonitorSmartphone, Terminal } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About Me | Personal Universe",
@@ -52,6 +52,17 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
               </p>
               <p>
                 {dict.about.objectivesP2}
+              </p>
+            </div>
+          </section>
+
+          <section className="flex flex-col gap-4">
+            <h2 className="text-2xl font-bold flex items-center gap-2 border-b pb-2">
+              <BookOpen className="w-5 h-5 text-primary" /> {dict.about.origin}
+            </h2>
+            <div className="prose prose-neutral dark:prose-invert">
+              <p>
+                {dict.about.originText}
               </p>
             </div>
           </section>
@@ -111,6 +122,36 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                   </div>
                 </div>
               ))}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <MonitorSmartphone className="w-4 h-4" /> {dict.about.arsenal}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-3">
+              <div className="flex items-center gap-3 border-b pb-2">
+                <Terminal className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm font-medium">{dict.about.gear.g1}</span>
+              </div>
+              <div className="flex items-center gap-3 border-b pb-2">
+                <Terminal className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm font-medium">{dict.about.gear.g2}</span>
+              </div>
+              <div className="flex items-center gap-3 border-b pb-2">
+                <Terminal className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm font-medium">{dict.about.gear.g3}</span>
+              </div>
+              <div className="flex items-center gap-3 border-b pb-2">
+                <Terminal className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm font-medium">{dict.about.gear.g4}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Terminal className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm font-medium">{dict.about.gear.g5}</span>
+              </div>
             </CardContent>
           </Card>
         </div>

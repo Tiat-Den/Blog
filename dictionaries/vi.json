@@ -38,6 +38,16 @@
       "q2Status": "Đang hoạt động",
       "q3": "1000 người dùng đầu tiên cho SaaS",
       "q3Status": "Đã khóa"
+    },
+    "origin": "Tiểu Sử",
+    "originText": "Hành trình của tôi bắt đầu từ sự say mê với các thế giới kỹ thuật số và cách chúng được tạo ra. Theo thời gian, sự tò mò đó phát triển thành niềm đam mê với kỹ thuật phần mềm, thiết kế hệ thống và trí tuệ nhân tạo. Tôi luôn không ngừng học hỏi, xây dựng và tìm cách giải quyết các vấn đề phức tạp bằng những giải pháp tối ưu, thanh lịch nhất.",
+    "arsenal": "Công Cụ & Trang Bị",
+    "gear": {
+      "g1": "PC Tự Lắp ráp (RTX 4070, 32GB RAM)",
+      "g2": "Bàn phím cơ Keychron Q1 Pro",
+      "g3": "Chuột Logitech MX Master 3S",
+      "g4": "VS Code & Neovim",
+      "g5": "Figma (Thiết kế UI/UX)"
     }
   },
   "blog": {

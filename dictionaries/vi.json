@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "about": "Giới thiệu",
+    "blog": "Bài viết",
+    "projects": "Dự án",
+    "journey": "Hành trình",
+    "explore": "Khám phá",
+    "brain": "Bộ Não",
+    "lab": "Thí nghiệm",
+    "capsule": "Kén thời gian"
+  },
+  "home": {
+    "title": "Chào mừng đến với Vũ Trụ Cá Nhân",
+    "description": "Một vũ trụ số về những gì tôi học, xây dựng và suy nghĩ. Không chỉ là một blog, mà là một bản đồ sống về hành trình của tôi.",
+    "readBlog": "Đọc Bài Viết",
+    "enterBrain": "Vào Bộ Não"
+  },
+  "footer": {
+    "rights": "Được xây dựng như một Vũ Trụ Cá Nhân. Đã đăng ký bản quyền."
+  }
+}

@@ -1,0 +1,98 @@
+---
+title: "Xử lý Media nâng cao trong Flutter với Agora RTC và FFmpeg"
+date: "2026-08-17"
+description: "Khám phá cách tích hợp tính năng giao tiếp thời gian thực và xử lý video trên thiết bị vào ứng dụng Flutter."
+tags: ["flutter", "dart", "agora", "ffmpeg", "video"]
+draft: false
+---
+
+# Xử lý Media nâng cao trong Flutter
+
+Trong khi các trình phát video cơ bản rất tuyệt vời cho việc tiêu thụ nội dung, các ứng dụng hiện đại thường yêu cầu các tính năng tương tác nhiều hơn. Đối với Flutter Movie App của mình, mình muốn khám phá các tính năng đồng bộ hóa thời gian thực và các tiện ích xử lý video. Đó là lúc **Agora RTC** và **FFmpeg** phát huy tác dụng.
+
+## Tương tác thời gian thực với Agora
+
+Giao tiếp thời gian thực (như Watch Parties) đang ngày càng phổ biến. Thư viện `agora_rtc_engine` cung cấp một SDK mạnh mẽ để nhúng âm thanh và video trực tiếp vào ứng dụng Flutter.
+
+### Khởi tạo Engine
+
+Quá trình thiết lập yêu cầu xử lý cẩn thận quyền truy cập và các lifecycle (vòng đời) của engine:
+
+```dart
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+late RtcEngine _engine;
+
+Future<void> initAgora() async {
+  // Yêu cầu quyền truy cập micro và camera
+  await [Permission.microphone, Permission.camera].request();
+
+  // Khởi tạo RtcEngine
+  _engine = createAgoraRtcEngine();
+  await _engine.initialize(const RtcEngineContext(
+    appId: "YOUR_AGORA_APP_ID",
+    channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
+  ));
+
+  // Lắng nghe các sự kiện (events)
+  _engine.registerEventHandler(
+    RtcEngineEventHandler(
+      onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
+        print("Đã tham gia kênh: ${connection.channelId}");
+      },
+      onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
+        print("Người dùng từ xa đã tham gia: $remoteUid");
+      },
+    ),
+  );
+
+  // Bật video và tham gia phòng
+  await _engine.enableVideo();
+  await _engine.joinChannel(
+    token: "YOUR_TEMP_TOKEN",
+    channelId: "movie_room_1",
+    uid: 0, 
+    options: const ChannelMediaOptions(),
+  );
+}
+```
+
+<Callout type="warning">
+  Việc xin quyền là rất quan trọng ở đây. Bạn phải sử dụng `permission_handler` để yêu cầu rõ ràng quyền truy cập camera và micro, đặc biệt là trên iOS - nơi áp dụng các chính sách bảo mật rất nghiêm ngặt.
+</Callout>
+
+## Xử lý Video trực tiếp trên thiết bị với FFmpeg
+
+Đôi khi, bạn cần xử lý video cục bộ trước khi tải lên hoặc chia sẻ — ví dụ như cắt một đoạn clip ngắn từ trailer hoặc nén file. `ffmpeg_kit_flutter_new` mang sức mạnh của FFmpeg lên nền tảng di động.
+
+### Thực thi lệnh FFmpeg
+
+FFmpeg hoạt động thông qua các chuỗi lệnh command-line, và package Flutter này sẽ thực thi chúng ở tầng native:
+
+```dart
+import 'package:ffmpeg_kit_flutter_new/ffmpeg_kit.dart';
+import 'package:ffmpeg_kit_flutter_new/return_code.dart';
+
+Future<void> compressVideo(String inputPath, String outputPath) async {
+  // Một lệnh cơ bản để nén video
+  String command = "-i $inputPath -vcodec libx264 -crf 28 $outputPath";
+
+  final session = await FFmpegKit.execute(command);
+  final returnCode = await session.getReturnCode();
+
+  if (ReturnCode.isSuccess(returnCode)) {
+    print("Nén video thành công!");
+  } else {
+    print("Quá trình nén thất bại.");
+  }
+}
+```
+
+<Callout type="tip">
+  Các thao tác FFmpeg sẽ làm đơ giao diện (block UI) nếu không được xử lý cẩn thận. Rất may, `FFmpegKit.execute` chạy bất đồng bộ, nhưng hãy lưu ý đến việc nó sẽ tiêu tốn rất nhiều CPU trên thiết bị!
+</Callout>
+
+## Kết luận
+
+Bằng cách tận dụng Agora và FFmpeg, Flutter Movie App vượt xa ranh giới của một ứng dụng phát video thông thường. Các công cụ này mang đến nhiều thách thức trong việc quản lý state (trạng thái) và tài nguyên, nhưng cuối cùng lại mở ra một cấp độ tính năng hoàn toàn mới cho các ứng dụng di động.

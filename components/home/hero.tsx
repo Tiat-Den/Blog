@@ -2,25 +2,24 @@ import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export function HeroSection() {
+export function HeroSection({ dict, lang }: { dict: any, lang: string }) {
   return (
     <section className="relative py-20 md:py-32 overflow-hidden">
       <Container className="relative z-10 flex flex-col items-center text-center gap-8">
         <div className="space-y-4 max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter">
-            Welcome to my <br />
-            <span className="text-primary">Personal Universe</span>
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter whitespace-pre-wrap">
+            {dict.home.title}
           </h1>
           <p className="text-xl text-muted-foreground md:text-2xl leading-relaxed">
-            A digital universe of what I learn, build and think. Not just a blog, but a living map of my journey.
+            {dict.home.description}
           </p>
         </div>
         <div className="flex items-center gap-4">
           <Button asChild size="lg">
-            <Link href="/blog">Read Blog</Link>
+            <Link href={`/${lang}/blog`}>{dict.home.readBlog}</Link>
           </Button>
           <Button asChild variant="outline" size="lg">
-            <Link href="/brain">Enter Brain</Link>
+            <Link href={`/${lang}/brain`}>{dict.home.enterBrain}</Link>
           </Button>
         </div>
       </Container>

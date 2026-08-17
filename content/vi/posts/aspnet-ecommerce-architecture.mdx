@@ -1,0 +1,65 @@
+---
+title: "Kiến trúc ASP.NET Core MVC cho Website Thương Mại Điện Tử"
+date: "2026-08-17"
+summary: "Cách cấu hình Entity Framework Core, ASP.NET Identity và Google OAuth để xây dựng Backend vững chắc cho hệ thống Web Store."
+tags: ["ASP.NET Core", "C#", "EF Core", "OAuth 2.0"]
+---
+
+Trong quá trình xây dựng dự án **Web Store (Bài Cuối Kỳ)**, mình đã áp dụng mô hình MVC truyền thống kết hợp với các công nghệ mạnh mẽ nhất của hệ sinh thái .NET. Bài viết này sẽ phân tích cách mình cấu hình các thành phần cốt lõi của Backend.
+
+## 1. Entity Framework Core & SQL Server
+
+Dự án sử dụng mô hình **Code-First**. Toàn bộ cấu trúc cơ sở dữ liệu được định nghĩa thông qua các class `Model` (như `Product`, `Order`, `Category`). 
+
+```csharp
+// Program.cs
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    )
+);
+```
+
+Để tránh việc phải gõ lệnh cập nhật database thủ công mỗi lần chạy máy chủ mới, mình đã thêm đoạn code tự động chạy `Migrate()` vào `Program.cs`. Nhờ đó, Database Schema sẽ luôn được đồng bộ với code mới nhất:
+
+```csharp
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    context.Database.Migrate();
+}
+```
+
+## 2. Quản lý Giỏ hàng bằng Session
+
+Vì giỏ hàng cần lưu trữ tạm thời trước khi người dùng quyết định thanh toán, mình sử dụng tính năng Session của ASP.NET Core:
+
+```csharp
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+```
+
+Dữ liệu giỏ hàng (CartItems) sẽ được tuần tự hóa (serialize) thành chuỗi JSON và lưu vào Session. Khi Session hết hạn sau 30 phút, giỏ hàng sẽ được tự động làm sạch.
+
+## 3. Xác thực & Phân quyền (Identity & Google OAuth)
+
+Bảo mật là yếu tố sống còn của một trang web thương mại điện tử. Mình sử dụng **ASP.NET Core Identity** để quản lý người dùng nội bộ, đồng thời tích hợp thêm Đăng nhập bằng Google để tăng tính tiện lợi:
+
+```csharp
+builder.Services.AddAuthentication()
+    .AddGoogle(options =>
+    {
+        options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+        options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+    });
+```
+
+Ngoài ra, hệ thống tự động khởi tạo dữ liệu phân quyền cơ bản (Admin/User) trong database thông qua `RoleSeeder.cs` mỗi khi ứng dụng khởi chạy lần đầu tiên.
+
+## Kết luận
+
+ASP.NET Core cung cấp một bộ công cụ "All-in-one" cực kỳ mạnh mẽ để xây dựng các ứng dụng web phức tạp. Việc kết hợp chặt chẽ giữa EF Core, Identity và MVC pattern giúp mã nguồn dễ đọc, dễ bảo trì và mở rộng trong tương lai.

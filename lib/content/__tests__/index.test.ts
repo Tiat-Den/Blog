@@ -12,7 +12,7 @@ describe("Content Loader", () => {
   describe("getFiles", () => {
     it("should return empty array if directory does not exist", async () => {
       vi.spyOn(fs, "existsSync").mockReturnValue(false);
-      const files = await getFiles("posts");
+      const files = await getFiles("vi", "posts");
       expect(files).toEqual([]);
     });
 
@@ -21,7 +21,7 @@ describe("Content Loader", () => {
       // @ts-ignore
       vi.spyOn(fs, "readdirSync").mockReturnValue(["test.mdx", "image.png", "note.md", ".DS_Store"]);
       
-      const files = await getFiles("posts");
+      const files = await getFiles("vi", "posts");
       expect(files).toEqual(["test.mdx", "note.md"]);
     });
   });
@@ -37,7 +37,7 @@ Hello World
       vi.spyOn(fs, "existsSync").mockReturnValue(true);
       vi.spyOn(fs, "readFileSync").mockReturnValue(mockMarkdown);
 
-      const content = await getFileContent("posts", "test.mdx", baseFrontmatterSchema);
+      const content = await getFileContent("vi", "posts", "test.mdx", baseFrontmatterSchema);
       
       expect(content).not.toBeNull();
       expect(content?.slug).toBe("test");
@@ -58,7 +58,7 @@ Bad
       // We also mock console.error to keep the test output clean
       vi.spyOn(console, "error").mockImplementation(() => {});
 
-      const content = await getFileContent("posts", "bad.mdx", baseFrontmatterSchema);
+      const content = await getFileContent("vi", "posts", "bad.mdx", baseFrontmatterSchema);
       expect(content).toBeNull();
     });
   });

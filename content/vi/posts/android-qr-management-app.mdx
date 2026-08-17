@@ -1,0 +1,51 @@
+---
+title: "Xây dựng ứng dụng Android Quản lý Kho bằng Mã QR"
+date: "2026-08-17"
+summary: "Cách kết hợp CameraX, ZXing và Room Database để xây dựng hệ thống quản lý xuất nhập tồn kho qua mã QR trên Android."
+tags: ["Android", "Kotlin", "Room DB", "ZXing", "CameraX"]
+---
+
+Trong bài viết này, mình sẽ chia sẻ về kiến trúc và các công nghệ cốt lõi được sử dụng trong **AppQLQR** - một ứng dụng Android Native giúp quản lý xuất nhập tồn kho thông qua việc quét mã QR.
+
+## Vấn đề cần giải quyết
+
+Quản lý kho thủ công thường mất nhiều thời gian kiểm đếm và dễ xảy ra sai sót khi ghi chép số lượng xuất/nhập. Việc gắn mỗi sản phẩm với một mã QR và sử dụng chính chiếc điện thoại thông minh để quét mã giúp tối ưu hóa quy trình này.
+
+## Tech Stack & Thư viện
+
+Ứng dụng được phát triển hoàn toàn bằng **Kotlin** với kiến trúc hiện đại, kết hợp các thư viện mạnh mẽ:
+
+1. **Room Database (`androidx.room`)**: Quản lý cơ sở dữ liệu SQLite cục bộ (Local Database). Lưu trữ thông tin Sản phẩm, Hóa đơn nhập, Hóa đơn xuất.
+2. **CameraX (`androidx.camera`)**: Cung cấp luồng dữ liệu hình ảnh (preview) mượt mà và dễ dàng từ camera của điện thoại.
+3. **ZXing Android Embedded**: Thư viện lõi giúp nhận diện và giải mã (decode) mã QR ngay trên thiết bị mà không cần kết nối mạng.
+4. **MPAndroidChart**: Vẽ biểu đồ trực quan (PieChart, BarChart) để hiển thị thống kê lượng hàng tồn kho.
+5. **Glide**: Xử lý tải và hiển thị hình ảnh sản phẩm mượt mà, tối ưu bộ nhớ.
+
+## Luồng hoạt động chính (User Flow)
+
+- **Đăng nhập & Xác thực**: Người dùng (Thủ kho) đăng nhập vào hệ thống.
+- **Quản lý sản phẩm**: Thêm sản phẩm mới và tạo mã QR tương ứng cho sản phẩm đó.
+- **Quét mã (Scan)**: Sử dụng Camera để quét mã QR trên thùng hàng. Hệ thống tự động nhận dạng và truy xuất thông tin sản phẩm từ Room DB.
+- **Tạo Hóa đơn (Import/Export)**: Sau khi quét thành công, người dùng nhập số lượng cần xuất hoặc nhập.
+- **Thống kê (Statistics)**: Tổng hợp dữ liệu từ các hóa đơn để tính toán số lượng tồn kho theo thời gian thực và vẽ biểu đồ.
+
+## Đoạn code cốt lõi: Quét mã QR
+
+Sự kết hợp giữa CameraX và ZXing cho phép chúng ta xây dựng một luồng quét mã liên tục (continuous scanning) rất tối ưu:
+
+```kotlin
+// Ví dụ cấu hình ZXing IntentIntegrator
+val integrator = IntentIntegrator(this)
+integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+integrator.setPrompt("Hướng camera vào mã QR của sản phẩm")
+integrator.setCameraId(0) // Camera sau
+integrator.setBeepEnabled(true)
+integrator.setBarcodeImageEnabled(true)
+integrator.initiateScan()
+```
+
+## Kết luận
+
+Việc xây dựng một ứng dụng quản lý kho bằng mã QR trên Android không còn quá khó khăn nhờ vào hệ sinh thái thư viện đa dạng. **Room** giúp thao tác dữ liệu an toàn và nhanh chóng, trong khi **CameraX + ZXing** giải quyết hoàn hảo bài toán nhận diện quang học.
+
+Bạn có thể xem thêm phần giới thiệu tổng quan về dự án này trong mục **Projects**.

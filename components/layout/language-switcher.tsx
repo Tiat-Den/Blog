@@ -2,11 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { usePathname, useRouter } from "next/navigation";
 
-export function LanguageSwitcher() {
+export function LanguageSwitcher({ currentLang = "vi" }: { currentLang?: string }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState("vi"); // Default is Vietnamese now since we translated it
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -27,9 +29,14 @@ export function LanguageSwitcher() {
   const activeLang = languages.find((l) => l.code === currentLang) || languages[0];
 
   const handleSelect = (code: string) => {
-    setCurrentLang(code);
     setIsOpen(false);
-    // TODO: Integrate actual i18n routing or state update here
+    if (code === currentLang) return;
+    
+    // Replace the current language in the pathname with the new one
+    // e.g., /vi/blog -> /en/blog
+    const segments = pathname.split("/");
+    segments[1] = code;
+    router.push(segments.join("/"));
   };
 
   return (
@@ -66,3 +73,4 @@ export function LanguageSwitcher() {
     </div>
   );
 }
+

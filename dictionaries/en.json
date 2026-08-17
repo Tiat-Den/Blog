@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "about": "About",
+    "blog": "Blog",
+    "projects": "Projects",
+    "journey": "Journey",
+    "explore": "Explore",
+    "brain": "Brain",
+    "lab": "Lab",
+    "capsule": "Capsule"
+  },
+  "home": {
+    "title": "Welcome to my Personal Universe",
+    "description": "A digital universe of what I learn, build and think. Not just a blog, but a living map of my journey.",
+    "readBlog": "Read Blog",
+    "enterBrain": "Enter Brain"
+  },
+  "footer": {
+    "rights": "Built as a Personal Universe. All rights reserved."
+  }
+}

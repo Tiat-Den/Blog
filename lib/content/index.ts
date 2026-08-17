@@ -57,19 +57,20 @@ export interface ContentItem<T = BaseFrontmatter> {
   metadata: T
 }
 
-export async function getFiles(directory: string): Promise<string[]> {
-  const fullPath = path.join(contentDir, directory)
+export async function getFiles(lang: string, directory: string): Promise<string[]> {
+  const fullPath = path.join(contentDir, lang, directory)
   if (!fs.existsSync(fullPath)) return []
   
   return fs.readdirSync(fullPath).filter((file) => file.endsWith(".mdx") || file.endsWith(".md"))
 }
 
 export async function getFileContent<T = BaseFrontmatter>(
+  lang: string,
   directory: string,
   fileName: string,
   schema: z.ZodType<T> = baseFrontmatterSchema as any
 ): Promise<ContentItem<T> | null> {
-  const fullPath = path.join(contentDir, directory, fileName)
+  const fullPath = path.join(contentDir, lang, directory, fileName)
   if (!fs.existsSync(fullPath)) return null
 
   const fileContent = fs.readFileSync(fullPath, "utf8")
@@ -91,14 +92,15 @@ export async function getFileContent<T = BaseFrontmatter>(
 }
 
 export async function getAllContent<T = BaseFrontmatter>(
+  lang: string,
   directory: string,
   schema: z.ZodType<T> = baseFrontmatterSchema as any
 ): Promise<ContentItem<T>[]> {
-  const files = await getFiles(directory)
+  const files = await getFiles(lang, directory)
   const items: ContentItem<T>[] = []
 
   for (const file of files) {
-    const content = await getFileContent<T>(directory, file, schema)
+    const content = await getFileContent<T>(lang, directory, file, schema)
     // Only return non-drafts in production
     if (content) {
       if (process.env.NODE_ENV === "production" && (content.metadata as any).draft) {

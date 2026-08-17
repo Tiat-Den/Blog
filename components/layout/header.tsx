@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "./container";
 import { CommandPalette } from "@/components/search/CommandPalette";
-
+import { LanguageSwitcher } from "./language-switcher";
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -20,7 +20,10 @@ export function Header() {
             <Link href="/lab" className="hover:text-foreground transition-colors">Lab</Link>
             <Link href="/capsule" className="hover:text-foreground transition-colors">Capsule</Link>
           </nav>
-          <CommandPalette />
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <CommandPalette />
+          </div>
         </div>
       </Container>
     </header>

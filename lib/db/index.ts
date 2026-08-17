@@ -3,7 +3,8 @@ import { Pool } from "pg";
 import * as schema from "./schema";
 
 // Disable connection pooling during build
-const connectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL || "postgres://postgres:password@localhost:5432/personal_universe";
+const rawConnectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL || "postgres://postgres:password@localhost:5432/personal_universe";
+const connectionString = rawConnectionString.split('?')[0];
 
 // Use a singleton for the db connection so we don't exhaust pool connections
 // during hot-reloading in development

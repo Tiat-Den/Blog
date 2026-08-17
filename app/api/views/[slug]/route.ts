@@ -41,7 +41,8 @@ export async function GET(request: NextRequest, props: { params: Promise<{ slug:
       { headers: { "Cache-Control": "no-store, max-age=0" } }
     );
   } catch (error) {
-    return NextResponse.json({ count: 0 }, { status: 500 });
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ count: 0, error: errorMessage }, { status: 500 });
   }
 }
 
@@ -73,6 +74,7 @@ export async function POST(request: NextRequest, props: { params: Promise<{ slug
     );
   } catch (error) {
     console.error("Failed to increment views:", error);
-    return NextResponse.json({ count: 0 }, { status: 500 });
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ count: 0, error: errorMessage }, { status: 500 });
   }
 }

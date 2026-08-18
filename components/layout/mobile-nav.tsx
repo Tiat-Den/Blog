@@ -1,11 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 export function MobileNav({ dict, lang }: { dict: any; lang: string }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; }
+  }, [isOpen]);
 
   return (
     <div className="md:hidden">
@@ -17,9 +33,9 @@ export function MobileNav({ dict, lang }: { dict: any; lang: string }) {
         <Menu className="h-6 w-6" />
       </button>
 
-      {isOpen && (
-        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
-          <div className="fixed inset-y-0 right-0 z-50 w-3/4 max-w-sm border-l bg-background p-6 shadow-lg transition-transform">
+      {mounted && isOpen && createPortal(
+        <div className="fixed inset-0 z-[100] bg-background/80 backdrop-blur-sm">
+          <div className="fixed inset-y-0 right-0 z-[100] w-3/4 max-w-sm border-l bg-background p-6 shadow-xl overflow-y-auto">
             <div className="flex items-center justify-between mb-8">
               <span className="font-bold tracking-tight text-xl">Menu</span>
               <button
@@ -42,7 +58,8 @@ export function MobileNav({ dict, lang }: { dict: any; lang: string }) {
               <Link href={`/${lang}/capsule`} onClick={() => setIsOpen(false)} className="hover:text-foreground transition-colors">{dict.nav.capsule}</Link>
             </nav>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

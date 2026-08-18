@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "./container";
 import { CommandPalette } from "@/components/search/CommandPalette";
 import { LanguageSwitcher } from "./language-switcher";
+import { MobileNav } from "./mobile-nav";
 
 export function Header({ dict, lang }: { dict: any; lang: string }) {
   return (
@@ -24,6 +25,7 @@ export function Header({ dict, lang }: { dict: any; lang: string }) {
           <div className="flex items-center gap-2">
             <CommandPalette />
             <LanguageSwitcher currentLang={lang} />
+            <MobileNav dict={dict} lang={lang} />
           </div>
         </div>
       </Container>

@@ -95,6 +95,11 @@ const generatePlanetTexture = (type: string): THREE.CanvasTexture | null => {
     ctx.fillRect(0, 0, 1024, 512);
     addHorizontalBands(['#f59e0b', '#fbbf24', '#fcd34d'], 25);
     addNoise('rgba(253, 230, 138, 0.4)', 200, 80, 20); // Swirling clouds
+  } else if (type === 'moon') {
+    ctx.fillStyle = '#d4d4d8';
+    ctx.fillRect(0, 0, 1024, 512);
+    addNoise('#a1a1aa', 150, 30, 10);
+    addNoise('#71717a', 200, 10, 2); // Craters
   } else if (type === 'sun') {
     const grd = ctx.createLinearGradient(0, 0, 0, 512);
     grd.addColorStop(0, "#fef08a");
@@ -114,21 +119,21 @@ const generatePlanetTexture = (type: string): THREE.CanvasTexture | null => {
 // Map planets in their realistic solar system order
 const PLANETS = [
   // 1. Mercury
-  { name: "Journey", url: "/journey", radius: 4, speed: 0.8, size: 0.2, type: "mercury", hasRing: false },
+  { name: "Journey", url: "/journey", radius: 4, speed: 0.8, size: 0.2, type: "mercury", hasRing: false, hasMoon: false },
   // 2. Venus
-  { name: "Capsule", url: "/capsule", radius: 6, speed: 0.6, size: 0.35, type: "venus", hasRing: false },
+  { name: "Capsule", url: "/capsule", radius: 6, speed: 0.6, size: 0.35, type: "venus", hasRing: false, hasMoon: false },
   // 3. Earth
-  { name: "About", url: "/about", radius: 8.5, speed: 0.5, size: 0.4, type: "earth", hasRing: false },
+  { name: "About", url: "/about", radius: 8.5, speed: 0.5, size: 0.4, type: "earth", hasRing: false, hasMoon: true },
   // 4. Mars
-  { name: "Blog", url: "/blog", radius: 11, speed: 0.4, size: 0.25, type: "mars", hasRing: false },
+  { name: "Blog", url: "/blog", radius: 11, speed: 0.4, size: 0.25, type: "mars", hasRing: false, hasMoon: false },
   // 5. Jupiter
-  { name: "Projects", url: "/projects", radius: 15, speed: 0.2, size: 1.0, type: "jupiter", hasRing: false },
+  { name: "Projects", url: "/projects", radius: 15, speed: 0.2, size: 1.0, type: "jupiter", hasRing: false, hasMoon: false },
   // 6. Saturn
-  { name: "Explore", url: "/explore", radius: 20, speed: 0.15, size: 0.85, type: "saturn", hasRing: true, ringColor: "#d4b872" },
+  { name: "Explore", url: "/explore", radius: 20, speed: 0.15, size: 0.85, type: "saturn", hasRing: true, ringColor: "#d4b872", hasMoon: false },
   // 7. Uranus
-  { name: "Brain", url: "/brain", radius: 25, speed: 0.1, size: 0.6, type: "uranus", hasRing: true, ringColor: "#a5f3fc" },
+  { name: "Brain", url: "/brain", radius: 25, speed: 0.1, size: 0.6, type: "uranus", hasRing: true, ringColor: "#a5f3fc", hasMoon: false },
   // 8. Neptune
-  { name: "Lab", url: "/lab", radius: 30, speed: 0.08, size: 0.55, type: "neptune", hasRing: false },
+  { name: "Lab", url: "/lab", radius: 30, speed: 0.08, size: 0.55, type: "neptune", hasRing: false, hasMoon: false },
 ];
 
 function Sun() {
@@ -158,11 +163,13 @@ function Sun() {
 function Planet({ data, lang }: { data: typeof PLANETS[0]; lang: string }) {
   const meshRef = useRef<THREE.Group>(null);
   const planetRef = useRef<THREE.Mesh>(null);
+  const moonRef = useRef<THREE.Mesh>(null);
   const router = useRouter();
   const [hovered, setHovered] = useState(false);
 
   const randomOffset = useMemo(() => Math.random() * Math.PI * 2, []);
   const texture = useMemo(() => generatePlanetTexture(data.type), [data.type]);
+  const moonTexture = useMemo(() => data.hasMoon ? generatePlanetTexture('moon') : null, [data.hasMoon]);
 
   useFrame(({ clock }) => {
     if (meshRef.current && planetRef.current) {
@@ -175,6 +182,15 @@ function Planet({ data, lang }: { data: typeof PLANETS[0]; lang: string }) {
       
       const targetScale = hovered ? 1.2 : 1;
       meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+      
+      // Moon orbit around planet
+      if (data.hasMoon && moonRef.current) {
+        const mt = clock.getElapsedTime() * 1.5; // Moon is faster
+        const moonDistance = data.size * 2.5; // Distance from Earth
+        moonRef.current.position.x = Math.cos(mt) * moonDistance;
+        moonRef.current.position.z = Math.sin(mt) * moonDistance;
+        moonRef.current.rotation.y += 0.02;
+      }
     }
   });
 
@@ -204,6 +220,14 @@ function Planet({ data, lang }: { data: typeof PLANETS[0]; lang: string }) {
         />
       </mesh>
       
+      {/* Moon */}
+      {data.hasMoon && (
+        <mesh ref={moonRef}>
+          <sphereGeometry args={[data.size * 0.3, 32, 32]} />
+          <meshStandardMaterial map={moonTexture} roughness={0.9} metalness={0.0} />
+        </mesh>
+      )}
+
       {/* Planetary Ring */}
       {data.hasRing && (
         <mesh rotation={[-Math.PI / 2.5, 0, 0]}>

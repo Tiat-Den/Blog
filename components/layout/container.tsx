@@ -6,8 +6,9 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function Container({ className, as: Component = "div", ...props }: ContainerProps) {
+  const Comp = Component as any;
   return (
-    <Component
+    <Comp
       className={cn("mx-auto w-full max-w-5xl px-6 lg:px-8", className)}
       {...props}
     />

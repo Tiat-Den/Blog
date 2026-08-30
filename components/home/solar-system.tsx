@@ -102,6 +102,7 @@ function OrbitRings() {
         }
         const geometry = new THREE.BufferGeometry().setFromPoints(points);
         return (
+          // @ts-ignore
           <line key={i} geometry={geometry}>
             <lineBasicMaterial color="#ffffff" transparent opacity={0.05} />
           </line>

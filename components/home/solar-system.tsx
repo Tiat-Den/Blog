@@ -15,77 +15,86 @@ const generatePlanetTexture = (type: string): THREE.CanvasTexture | null => {
   const ctx = canvas.getContext('2d');
   if (!ctx) return null;
 
-  if (type === 'earth') {
-    ctx.fillStyle = '#1e3a8a'; // Ocean
-    ctx.fillRect(0, 0, 1024, 512);
-    ctx.fillStyle = '#15803d'; // Landmass
-    for (let i = 0; i < 200; i++) {
+  // Utility to add soft noise/clouds
+  const addNoise = (color: string, count: number, maxRadius: number, blur: number) => {
+    ctx.filter = `blur(${blur}px)`;
+    ctx.fillStyle = color;
+    for (let i = 0; i < count; i++) {
       ctx.beginPath();
-      ctx.arc(Math.random() * 1024, Math.random() * 512, Math.random() * 50 + 10, 0, Math.PI * 2);
+      ctx.arc(Math.random() * 1024, Math.random() * 512, Math.random() * maxRadius + 5, 0, Math.PI * 2);
       ctx.fill();
     }
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)'; // Clouds
-    for (let i = 0; i < 400; i++) {
-      ctx.beginPath();
-      ctx.arc(Math.random() * 1024, Math.random() * 512, Math.random() * 30 + 5, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  } else if (type === 'mars') {
-    ctx.fillStyle = '#b91c1c';
-    ctx.fillRect(0, 0, 1024, 512);
-    ctx.fillStyle = '#7f1d1d';
-    for (let i = 0; i < 800; i++) {
-      ctx.beginPath();
-      ctx.arc(Math.random() * 1024, Math.random() * 512, Math.random() * 12 + 2, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  } else if (type === 'jupiter') {
+    ctx.filter = 'none';
+  };
+
+  const addHorizontalBands = (colors: string[], blur: number) => {
+    ctx.filter = `blur(${blur}px)`;
     for (let y = 0; y < 512; y += 4) {
-      const isDark = Math.sin(y * 0.05 + Math.random()) > 0;
-      ctx.fillStyle = isDark ? '#9a3412' : '#d97706';
-      ctx.fillRect(0, y, 1024, 4 + Math.random() * 10);
+      ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+      ctx.globalAlpha = 0.5 + Math.random() * 0.5;
+      ctx.fillRect(0, y, 1024, Math.random() * 20 + 5);
     }
-    ctx.fillStyle = '#7f1d1d'; // Great red spot
+    ctx.globalAlpha = 1.0;
+    ctx.filter = 'none';
+  };
+
+  if (type === 'earth') {
+    ctx.fillStyle = '#0f172a'; // Deep ocean
+    ctx.fillRect(0, 0, 1024, 512);
+    addNoise('#1e3a8a', 100, 100, 20); // Lighter ocean spots
+    addNoise('#166534', 150, 60, 10); // Landmasses
+    addNoise('#4d7c0f', 100, 40, 5); 
+    addNoise('rgba(255, 255, 255, 0.7)', 300, 40, 15); // Clouds
+  } else if (type === 'mars') {
+    ctx.fillStyle = '#7f1d1d';
+    ctx.fillRect(0, 0, 1024, 512);
+    addNoise('#991b1b', 200, 80, 20);
+    addNoise('#450a0a', 300, 20, 5); // Craters
+    addNoise('#b91c1c', 100, 100, 30);
+  } else if (type === 'jupiter') {
+    ctx.fillStyle = '#78350f';
+    ctx.fillRect(0, 0, 1024, 512);
+    addHorizontalBands(['#92400e', '#b45309', '#d97706', '#fcd34d', '#78350f'], 8);
+    // Great red spot
+    ctx.filter = 'blur(10px)';
+    ctx.fillStyle = '#7f1d1d';
     ctx.beginPath();
     ctx.ellipse(300, 350, 80, 40, 0, 0, Math.PI * 2);
     ctx.fill();
+    ctx.fillStyle = '#450a0a';
+    ctx.beginPath();
+    ctx.ellipse(300, 350, 40, 20, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.filter = 'none';
   } else if (type === 'saturn') {
-    for (let y = 0; y < 512; y += 8) {
-      ctx.fillStyle = Math.sin(y * 0.02) > 0 ? '#fde68a' : '#fcd34d';
-      ctx.fillRect(0, y, 1024, 8 + Math.random() * 4);
-    }
+    ctx.fillStyle = '#b45309';
+    ctx.fillRect(0, 0, 1024, 512);
+    addHorizontalBands(['#d97706', '#fcd34d', '#fde68a', '#b45309'], 10);
   } else if (type === 'mercury') {
-    ctx.fillStyle = '#737373';
-    ctx.fillRect(0, 0, 1024, 512);
     ctx.fillStyle = '#404040';
-    for (let i = 0; i < 1000; i++) {
-      ctx.beginPath();
-      ctx.arc(Math.random() * 1024, Math.random() * 512, Math.random() * 8 + 1, 0, Math.PI * 2);
-      ctx.fill();
-    }
+    ctx.fillRect(0, 0, 1024, 512);
+    addNoise('#525252', 200, 50, 10);
+    addNoise('#262626', 400, 15, 2); // Small craters
   } else if (type === 'uranus') {
-    ctx.fillStyle = '#67e8f9';
+    ctx.fillStyle = '#0891b2';
     ctx.fillRect(0, 0, 1024, 512);
-    ctx.fillStyle = '#22d3ee';
-    for (let y = 0; y < 512; y += 30) {
-      ctx.fillRect(0, y, 1024, 10);
-    }
+    addHorizontalBands(['#06b6d4', '#22d3ee', '#67e8f9'], 15);
   } else if (type === 'neptune') {
-    ctx.fillStyle = '#1d4ed8';
+    ctx.fillStyle = '#1e3a8a';
     ctx.fillRect(0, 0, 1024, 512);
-    ctx.fillStyle = '#3b82f6';
-    for (let y = 0; y < 512; y += 20) {
-      if (Math.random() > 0.5) ctx.fillRect(0, y, 1024, 5);
-    }
+    addHorizontalBands(['#1d4ed8', '#2563eb', '#1e40af'], 20);
+    // Dark spot
+    ctx.filter = 'blur(15px)';
+    ctx.fillStyle = '#1e3a8a';
+    ctx.beginPath();
+    ctx.ellipse(600, 250, 60, 30, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.filter = 'none';
   } else if (type === 'venus') {
-    ctx.fillStyle = '#f59e0b';
+    ctx.fillStyle = '#d97706';
     ctx.fillRect(0, 0, 1024, 512);
-    ctx.fillStyle = '#fbbf24';
-    for (let i = 0; i < 300; i++) {
-      ctx.beginPath();
-      ctx.ellipse(Math.random() * 1024, Math.random() * 512, Math.random() * 100 + 20, 10, Math.random() * Math.PI, 0, Math.PI * 2);
-      ctx.fill();
-    }
+    addHorizontalBands(['#f59e0b', '#fbbf24', '#fcd34d'], 25);
+    addNoise('rgba(253, 230, 138, 0.4)', 200, 80, 20); // Swirling clouds
   } else if (type === 'sun') {
     const grd = ctx.createLinearGradient(0, 0, 0, 512);
     grd.addColorStop(0, "#fef08a");
@@ -93,14 +102,8 @@ const generatePlanetTexture = (type: string): THREE.CanvasTexture | null => {
     grd.addColorStop(1, "#ea580c");
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, 1024, 512);
-    ctx.fillStyle = "#fef08a";
-    for (let i = 0; i < 150; i++) {
-      ctx.globalAlpha = Math.random() * 0.6;
-      ctx.beginPath();
-      ctx.arc(Math.random() * 1024, Math.random() * 512, Math.random() * 30 + 5, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1.0;
+    addNoise('#fef08a', 200, 60, 15);
+    addNoise('#c2410c', 100, 20, 8); // Sunspots
   }
 
   const texture = new THREE.CanvasTexture(canvas);
@@ -108,15 +111,24 @@ const generatePlanetTexture = (type: string): THREE.CanvasTexture | null => {
   return texture;
 };
 
+// Map planets in their realistic solar system order
 const PLANETS = [
-  { name: "About", url: "/about", radius: 6, speed: 0.8, size: 0.5, type: "earth", hasRing: false },
-  { name: "Blog", url: "/blog", radius: 8.5, speed: 0.6, size: 0.4, type: "mars", hasRing: false },
-  { name: "Projects", url: "/projects", radius: 11.5, speed: 0.4, size: 0.9, type: "jupiter", hasRing: false },
-  { name: "Journey", url: "/journey", radius: 14, speed: 0.3, size: 0.3, type: "mercury", hasRing: false },
-  { name: "Explore", url: "/explore", radius: 17, speed: 0.25, size: 0.75, type: "saturn", hasRing: true, ringColor: "#fde68a" },
-  { name: "Brain", url: "/brain", radius: 20, speed: 0.15, size: 0.6, type: "uranus", hasRing: true, ringColor: "#a5f3fc" },
-  { name: "Lab", url: "/lab", radius: 23, speed: 0.1, size: 0.6, type: "neptune", hasRing: false },
-  { name: "Capsule", url: "/capsule", radius: 26, speed: 0.08, size: 0.4, type: "venus", hasRing: false },
+  // 1. Mercury
+  { name: "Journey", url: "/journey", radius: 4, speed: 0.8, size: 0.2, type: "mercury", hasRing: false },
+  // 2. Venus
+  { name: "Capsule", url: "/capsule", radius: 6, speed: 0.6, size: 0.35, type: "venus", hasRing: false },
+  // 3. Earth
+  { name: "About", url: "/about", radius: 8.5, speed: 0.5, size: 0.4, type: "earth", hasRing: false },
+  // 4. Mars
+  { name: "Blog", url: "/blog", radius: 11, speed: 0.4, size: 0.25, type: "mars", hasRing: false },
+  // 5. Jupiter
+  { name: "Projects", url: "/projects", radius: 15, speed: 0.2, size: 1.0, type: "jupiter", hasRing: false },
+  // 6. Saturn
+  { name: "Explore", url: "/explore", radius: 20, speed: 0.15, size: 0.85, type: "saturn", hasRing: true, ringColor: "#d4b872" },
+  // 7. Uranus
+  { name: "Brain", url: "/brain", radius: 25, speed: 0.1, size: 0.6, type: "uranus", hasRing: true, ringColor: "#a5f3fc" },
+  // 8. Neptune
+  { name: "Lab", url: "/lab", radius: 30, speed: 0.08, size: 0.55, type: "neptune", hasRing: false },
 ];
 
 function Sun() {
@@ -133,7 +145,7 @@ function Sun() {
     <mesh ref={meshRef}>
       <sphereGeometry args={[3, 64, 64]} />
       <meshBasicMaterial map={texture} color="#ffffff" />
-      <pointLight intensity={200} distance={150} decay={1.5} color="#FDF2E9" />
+      <pointLight intensity={300} distance={200} decay={1.5} color="#FDF2E9" />
       {/* Outer Glow */}
       <mesh>
         <sphereGeometry args={[3.2, 32, 32]} />
